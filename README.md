@@ -5,6 +5,10 @@
 
 ![DeepSeek Color 五大色卡](docs/share-poster.png)
 
+## 演示
+
+▶️ [观看 20 秒演示视频](docs/demo.mp4)——五套皮肤切换效果一览（GitHub 文件页内可直接播放）。
+
 ## 五套皮肤
 
 | 皮肤 | 目录 | 基调 | 适用场景 |
