@@ -1,0 +1,67 @@
+/**
+ * 深夜机房 Midnight Cluster — DeepSeek Color skin for DSH skin-center (schema v2).
+ *
+ * L1 only: remaps the official --dsw-alias-* semantic tokens.
+ * Theme-agnostic: the palette IS the whole look, so values live on :root
+ * and apply in both light and dark shell modes.
+ * No patches.css, no hooks.mjs, no background media.
+ *
+ * 「深夜的机房没有声音，只有信号灯替星辰值班。」
+ */
+
+:root {
+  /* surfaces */
+  --dsw-alias-bg-base: #0D1420;
+  --dsw-alias-bg-layer-1: #1c222d;
+  --dsw-alias-bg-layer-2: #16202F;
+  --dsw-alias-bg-layer-3: #2A3A52;
+  --dsw-alias-bg-overlay: #1c222de0;
+  --dsw-alias-bg-skeleton: #E8EDF510;
+
+  /* borders */
+  --dsw-alias-border-l1: #E8EDF514;
+  --dsw-alias-border-l2: #E8EDF524;
+  --dsw-alias-border-l3: #E8EDF536;
+  --dsw-alias-border-l4: #E8EDF548;
+
+  /* labels */
+  --dsw-alias-label-primary: #E8EDF5;
+  --dsw-alias-label-secondary: #8B99AF;
+  --dsw-alias-label-tertiary: #5f6a7d;
+  --dsw-alias-label-dimmed: #78859a;
+  --dsw-alias-label-caption: #8b99af;
+
+  /* brand + interactive */
+  --dsw-alias-brand-primary: #5B8CFF;
+  --dsw-alias-brand-text: #0D1420;
+  --dsw-alias-interactive-bg-hover: #5B8CFF14;
+  --dsw-alias-interactive-bg-active: #5B8CFF24;
+
+  /* state colors */
+  --dsw-alias-state-error-primary: #F06666;
+  --dsw-alias-state-warn-primary: #E0A63F;
+  --dsw-alias-state-success-primary: #4CC58F;
+  --dsw-alias-state-business-primary: #5B8CFF;
+
+  /* buttons */
+  --dsw-alias-button-primary-fill: #5B8CFF;
+  --dsw-alias-button-primary-hover: #79a1ff;
+  --dsw-alias-label-primary-foreground: #0D1420;
+  --dsw-alias-button-contrast-fill: #0D1420;
+
+  /* shell anchors */
+  --dsw-specific-sidebar-fill: #16202F;
+  --dsw-specific-sidebar-nav-item-hover: #5B8CFF14;
+  --dsw-specific-sidebar-nav-item-active: #5B8CFF24;
+
+  /* overlays + elevation */
+  --dsw-alias-tooltip-bg: #0D1420;
+  --dsw-alias-tooltip-fg: #0D1420;
+  --dsw-shadow-lv1: 0 1px 2px #E8EDF514;
+  --dsw-shadow-lv2: 0 4px 12px #E8EDF51f;
+  --dsw-shadow-lv3: 0 12px 32px #E8EDF52b;
+
+  /* scrollbars */
+  --dsw-alias-scrollbar-bg-l2: #E8EDF520;
+  --dsw-alias-scrollbar-hover-l2: #E8EDF538;
+}

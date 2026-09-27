@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "whale-cyan",
+  "name": "鲸鱼浅青",
+  "nameEn": "Whale Cyan",
+  "version": "1.0.0",
+  "author": "78tyih",
+  "tagline": "DeepSeek Color · 呼吸感设计 · 数据产品与开发者工具",
+  "description": "「鲸鱼跃出海面的那一秒，整个世界都是浅青色的。」 —— DeepSeek Color 五大色卡之一，纯 token 皮肤：只重映射官方 --dsw-alias-* 语义 token（L1），零补丁零脚本。呼吸感设计 · 数据产品与开发者工具。",
+  "tags": [
+    "deepseek",
+    "cyan",
+    "light",
+    "data",
+    "devtools",
+    "deepseek-color",
+    "tokens"
+  ],
+  "accent": "#00B3F4",
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css"
+  }
+}

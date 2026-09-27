@@ -1,0 +1,67 @@
+/**
+ * 深潜蓝 Deep Dive Blue — DeepSeek Color skin for DSH skin-center (schema v2).
+ *
+ * L1 only: remaps the official --dsw-alias-* semantic tokens.
+ * Theme-agnostic: the palette IS the whole look, so values live on :root
+ * and apply in both light and dark shell modes.
+ * No patches.css, no hooks.mjs, no background media.
+ *
+ * 「向下潜，直到光变成蓝色——思想的深度，决定了蓝的纯度。」
+ */
+
+:root {
+  /* surfaces */
+  --dsw-alias-bg-base: #F5F7FB;
+  --dsw-alias-bg-layer-1: #FFFFFF;
+  --dsw-alias-bg-layer-2: #DCE5F5;
+  --dsw-alias-bg-layer-3: #A9BCE0;
+  --dsw-alias-bg-overlay: #FFFFFFe0;
+  --dsw-alias-bg-skeleton: #0E1B3D10;
+
+  /* borders */
+  --dsw-alias-border-l1: #0E1B3D14;
+  --dsw-alias-border-l2: #0E1B3D24;
+  --dsw-alias-border-l3: #0E1B3D36;
+  --dsw-alias-border-l4: #0E1B3D48;
+
+  /* labels */
+  --dsw-alias-label-primary: #0E1B3D;
+  --dsw-alias-label-secondary: #5A6B8C;
+  --dsw-alias-label-tertiary: #909cb3;
+  --dsw-alias-label-dimmed: #afb8c9;
+  --dsw-alias-label-caption: #c6cdda;
+
+  /* brand + interactive */
+  --dsw-alias-brand-primary: #4D6BFE;
+  --dsw-alias-brand-text: #0E1B3D;
+  --dsw-alias-interactive-bg-hover: #4D6BFE14;
+  --dsw-alias-interactive-bg-active: #4D6BFE24;
+
+  /* state colors */
+  --dsw-alias-state-error-primary: #D64545;
+  --dsw-alias-state-warn-primary: #C98A1B;
+  --dsw-alias-state-success-primary: #2F9E6E;
+  --dsw-alias-state-business-primary: #4D6BFE;
+
+  /* buttons */
+  --dsw-alias-button-primary-fill: #4D6BFE;
+  --dsw-alias-button-primary-hover: #6983fe;
+  --dsw-alias-label-primary-foreground: #FFFFFF;
+  --dsw-alias-button-contrast-fill: #0E1B3D;
+
+  /* shell anchors */
+  --dsw-specific-sidebar-fill: #DCE5F5;
+  --dsw-specific-sidebar-nav-item-hover: #4D6BFE14;
+  --dsw-specific-sidebar-nav-item-active: #4D6BFE24;
+
+  /* overlays + elevation */
+  --dsw-alias-tooltip-bg: #0E1B3D;
+  --dsw-alias-tooltip-fg: #F5F7FB;
+  --dsw-shadow-lv1: 0 1px 2px #0E1B3D14;
+  --dsw-shadow-lv2: 0 4px 12px #0E1B3D1f;
+  --dsw-shadow-lv3: 0 12px 32px #0E1B3D2b;
+
+  /* scrollbars */
+  --dsw-alias-scrollbar-bg-l2: #0E1B3D20;
+  --dsw-alias-scrollbar-hover-l2: #0E1B3D38;
+}

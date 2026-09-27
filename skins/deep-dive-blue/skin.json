@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "deep-dive-blue",
+  "name": "深潜蓝",
+  "nameEn": "Deep Dive Blue",
+  "version": "1.0.0",
+  "author": "78tyih",
+  "tagline": "DeepSeek Color · 理性浪漫主义 · AI 产品与官网",
+  "description": "「向下潜，直到光变成蓝色——思想的深度，决定了蓝的纯度。」 —— DeepSeek Color 五大色卡之一，纯 token 皮肤：只重映射官方 --dsw-alias-* 语义 token（L1），零补丁零脚本。理性浪漫主义 · AI 产品与官网。",
+  "tags": [
+    "deepseek",
+    "blue",
+    "light",
+    "ai",
+    "official-site",
+    "deepseek-color",
+    "tokens"
+  ],
+  "accent": "#4D6BFE",
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css"
+  }
+}

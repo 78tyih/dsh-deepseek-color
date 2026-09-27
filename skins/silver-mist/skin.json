@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "silver-mist",
+  "name": "雾灰银",
+  "nameEn": "Silver Mist",
+  "version": "1.0.0",
+  "author": "78tyih",
+  "tagline": "DeepSeek Color · Quiet Luxury 静奢风 · 金融与企业官网",
+  "description": "「清晨的雾最克制，它什么都不说，却让一切显得更贵。」 —— DeepSeek Color 五大色卡之一，纯 token 皮肤：只重映射官方 --dsw-alias-* 语义 token（L1），零补丁零脚本。Quiet Luxury 静奢风 · 金融与企业官网。",
+  "tags": [
+    "deepseek",
+    "gray",
+    "light",
+    "finance",
+    "quiet-luxury",
+    "deepseek-color",
+    "tokens"
+  ],
+  "accent": "#4D6BFE",
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css"
+  }
+}

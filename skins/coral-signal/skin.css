@@ -1,0 +1,67 @@
+/**
+ * 珊瑚信号 Coral Signal — DeepSeek Color skin for DSH skin-center (schema v2).
+ *
+ * L1 only: remaps the official --dsw-alias-* semantic tokens.
+ * Theme-agnostic: the palette IS the whole look, so values live on :root
+ * and apply in both light and dark shell modes.
+ * No patches.css, no hooks.mjs, no background media.
+ *
+ * 「深海里最暖的一束光，是珊瑚在说：我在这里。」
+ */
+
+:root {
+  /* surfaces */
+  --dsw-alias-bg-base: #FBF6F1;
+  --dsw-alias-bg-layer-1: #FFFFFF;
+  --dsw-alias-bg-layer-2: #F0E4DA;
+  --dsw-alias-bg-layer-3: #E3C4B5;
+  --dsw-alias-bg-overlay: #FFFFFFe0;
+  --dsw-alias-bg-skeleton: #2B1D1810;
+
+  /* borders */
+  --dsw-alias-border-l1: #2B1D1814;
+  --dsw-alias-border-l2: #2B1D1824;
+  --dsw-alias-border-l3: #2B1D1836;
+  --dsw-alias-border-l4: #2B1D1848;
+
+  /* labels */
+  --dsw-alias-label-primary: #2B1D18;
+  --dsw-alias-label-secondary: #7A6157;
+  --dsw-alias-label-tertiary: #a7958d;
+  --dsw-alias-label-dimmed: #c1b3ac;
+  --dsw-alias-label-caption: #d4c9c3;
+
+  /* brand + interactive */
+  --dsw-alias-brand-primary: #FF5A3C;
+  --dsw-alias-brand-text: #2B1D18;
+  --dsw-alias-interactive-bg-hover: #FF5A3C14;
+  --dsw-alias-interactive-bg-active: #FF5A3C24;
+
+  /* state colors */
+  --dsw-alias-state-error-primary: #D64545;
+  --dsw-alias-state-warn-primary: #C98A1B;
+  --dsw-alias-state-success-primary: #2F9E6E;
+  --dsw-alias-state-business-primary: #FF5A3C;
+
+  /* buttons */
+  --dsw-alias-button-primary-fill: #FF5A3C;
+  --dsw-alias-button-primary-hover: #ff745b;
+  --dsw-alias-label-primary-foreground: #FFFFFF;
+  --dsw-alias-button-contrast-fill: #2B1D18;
+
+  /* shell anchors */
+  --dsw-specific-sidebar-fill: #F0E4DA;
+  --dsw-specific-sidebar-nav-item-hover: #FF5A3C14;
+  --dsw-specific-sidebar-nav-item-active: #FF5A3C24;
+
+  /* overlays + elevation */
+  --dsw-alias-tooltip-bg: #2B1D18;
+  --dsw-alias-tooltip-fg: #FBF6F1;
+  --dsw-shadow-lv1: 0 1px 2px #2B1D1814;
+  --dsw-shadow-lv2: 0 4px 12px #2B1D181f;
+  --dsw-shadow-lv3: 0 12px 32px #2B1D182b;
+
+  /* scrollbars */
+  --dsw-alias-scrollbar-bg-l2: #2B1D1820;
+  --dsw-alias-scrollbar-hover-l2: #2B1D1838;
+}

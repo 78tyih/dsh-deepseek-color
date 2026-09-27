@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "midnight-cluster",
+  "name": "深夜机房",
+  "nameEn": "Midnight Cluster",
+  "version": "1.0.0",
+  "author": "78tyih",
+  "tagline": "DeepSeek Color · 暗色即奢侈 · 监控大屏与硬件发布",
+  "description": "「深夜的机房没有声音，只有信号灯替星辰值班。」 —— DeepSeek Color 五大色卡之一，纯 token 皮肤：只重映射官方 --dsw-alias-* 语义 token（L1），零补丁零脚本。暗色即奢侈 · 监控大屏与硬件发布。",
+  "tags": [
+    "deepseek",
+    "dark",
+    "navy",
+    "dashboard",
+    "hardware",
+    "deepseek-color",
+    "tokens"
+  ],
+  "accent": "#5B8CFF",
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css"
+  }
+}

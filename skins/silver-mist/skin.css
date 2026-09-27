@@ -1,0 +1,67 @@
+/**
+ * 雾灰银 Silver Mist — DeepSeek Color skin for DSH skin-center (schema v2).
+ *
+ * L1 only: remaps the official --dsw-alias-* semantic tokens.
+ * Theme-agnostic: the palette IS the whole look, so values live on :root
+ * and apply in both light and dark shell modes.
+ * No patches.css, no hooks.mjs, no background media.
+ *
+ * 「清晨的雾最克制，它什么都不说，却让一切显得更贵。」
+ */
+
+:root {
+  /* surfaces */
+  --dsw-alias-bg-base: #F4F4F2;
+  --dsw-alias-bg-layer-1: #FFFFFF;
+  --dsw-alias-bg-layer-2: #E4E5E1;
+  --dsw-alias-bg-layer-3: #C6CBC9;
+  --dsw-alias-bg-overlay: #FFFFFFe0;
+  --dsw-alias-bg-skeleton: #1A1D2110;
+
+  /* borders */
+  --dsw-alias-border-l1: #1A1D2114;
+  --dsw-alias-border-l2: #1A1D2124;
+  --dsw-alias-border-l3: #1A1D2136;
+  --dsw-alias-border-l4: #1A1D2148;
+
+  /* labels */
+  --dsw-alias-label-primary: #1A1D21;
+  --dsw-alias-label-secondary: #5C615E;
+  --dsw-alias-label-tertiary: #919492;
+  --dsw-alias-label-dimmed: #b0b2af;
+  --dsw-alias-label-caption: #c6c8c6;
+
+  /* brand + interactive */
+  --dsw-alias-brand-primary: #4D6BFE;
+  --dsw-alias-brand-text: #1A1D21;
+  --dsw-alias-interactive-bg-hover: #4D6BFE14;
+  --dsw-alias-interactive-bg-active: #4D6BFE24;
+
+  /* state colors */
+  --dsw-alias-state-error-primary: #D64545;
+  --dsw-alias-state-warn-primary: #C98A1B;
+  --dsw-alias-state-success-primary: #2F9E6E;
+  --dsw-alias-state-business-primary: #4D6BFE;
+
+  /* buttons */
+  --dsw-alias-button-primary-fill: #4D6BFE;
+  --dsw-alias-button-primary-hover: #6983fe;
+  --dsw-alias-label-primary-foreground: #FFFFFF;
+  --dsw-alias-button-contrast-fill: #1A1D21;
+
+  /* shell anchors */
+  --dsw-specific-sidebar-fill: #E4E5E1;
+  --dsw-specific-sidebar-nav-item-hover: #4D6BFE14;
+  --dsw-specific-sidebar-nav-item-active: #4D6BFE24;
+
+  /* overlays + elevation */
+  --dsw-alias-tooltip-bg: #1A1D21;
+  --dsw-alias-tooltip-fg: #F4F4F2;
+  --dsw-shadow-lv1: 0 1px 2px #1A1D2114;
+  --dsw-shadow-lv2: 0 4px 12px #1A1D211f;
+  --dsw-shadow-lv3: 0 12px 32px #1A1D212b;
+
+  /* scrollbars */
+  --dsw-alias-scrollbar-bg-l2: #1A1D2120;
+  --dsw-alias-scrollbar-hover-l2: #1A1D2138;
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "coral-signal",
+  "name": "珊瑚信号",
+  "nameEn": "Coral Signal",
+  "version": "1.0.0",
+  "author": "78tyih",
+  "tagline": "DeepSeek Color · 有温度的 AI · 消费级与内容产品",
+  "description": "「深海里最暖的一束光，是珊瑚在说：我在这里。」 —— DeepSeek Color 五大色卡之一，纯 token 皮肤：只重映射官方 --dsw-alias-* 语义 token（L1），零补丁零脚本。有温度的 AI · 消费级与内容产品。",
+  "tags": [
+    "deepseek",
+    "coral",
+    "warm",
+    "light",
+    "consumer-ai",
+    "deepseek-color",
+    "tokens"
+  ],
+  "accent": "#FF5A3C",
+  "preview": {
+    "light": "preview/light.jpg",
+    "dark": "preview/dark.jpg"
+  },
+  "contributes": {
+    "stylesheet": "skin.css"
+  }
+}
