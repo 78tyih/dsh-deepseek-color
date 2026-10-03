@@ -1,0 +1,61 @@
+{
+  "slug": "dsh-deepseek-color",
+  "name": "DeepSeek Color — DSH 皮肤包",
+  "type": "token-pack",
+  "repo": "https://github.com/78tyih/dsh-deepseek-color",
+  "language": "CSS",
+  "status": "available",
+  "last_verified": "2026-10-03",
+  "one_liner": {
+    "zh": "五套纯 token 皮肤，把 DeepSeek Color 色卡带进 DeepSeek Harness。零补丁、零脚本、零背景媒体——最安全的一类皮肤。",
+    "en": "Five pure-token skins bringing the DeepSeek Color palettes into DeepSeek Harness. No patches, no scripts, no background media — the safest class of skin."
+  },
+  "problem": {
+    "zh": "DSH 用户想换观感，但皮肤大多靠补丁 DOM / 注入 JS / 替换背景媒体，随官方更新失效且不安全；同时 AI 产品的配色大多随意，缺一套成体系的色卡。",
+    "en": "DSH users want a new look, but most skins patch the DOM, inject JS, or swap background media — fragile and unsafe. Meanwhile AI products rarely get a disciplined palette system."
+  },
+  "scenarios": [
+    {
+      "zh": "给 DSH 桌面端/Web UI 换上 DeepSeek 主色系观感",
+      "en": "Reskin DSH desktop/web with the DeepSeek look",
+      "outcome_zh": "拷一个目录进 ~/.dsh/skins/，皮肤中心刷新即可试穿/应用",
+      "outcome_en": "Copy one directory into ~/.dsh/skins/, refresh in the skin center, try it on"
+    },
+    {
+      "zh": "为不同定位的产品选基调（AI 官网 / 数据工具 / 暗色大屏 / 金融 / 消费级）",
+      "en": "Pick a mood per product positioning (AI site / data tools / dark dashboard / finance / consumer)",
+      "outcome_zh": "五套皮肤各配适用场景：深潜蓝/鲸青/深夜机房/雾灰银/珊瑚信号",
+      "outcome_en": "Five skins, five moods: Deep Dive Blue / Whale Cyan / Midnight Cluster / Silver Mist / Coral Signal"
+    }
+  ],
+  "architecture": {
+    "summary_zh": "每套皮肤 = 一个目录（skin.json + skin.css + preview 明暗预览图）。CSS 只重映射官方 --dsw-alias-* 语义 token（L1 层），值写在 :root，明暗模式一致呈现。",
+    "summary_en": "Each skin is one directory (skin.json + skin.css + light/dark previews). The CSS only remaps official --dsw-alias-* semantic tokens (L1); values live on :root and apply in both shell modes.",
+    "modules": [
+      {"path": "skins/*/skin.css", "role_zh": "纯 token 重映射：surfaces/borders/labels/brand/states/buttons/shadows/scrollbars", "role_en": "Pure token remap across all semantic groups"},
+      {"path": "skins/*/skin.json", "role_zh": "皮肤元数据（schema v2，皮肤中心识别用）", "role_en": "Skin metadata (schema v2, for the skin center)"},
+      {"path": "skins/*/preview/", "role_zh": "明暗两张预览 JPG", "role_en": "Light + dark preview JPGs"},
+      {"path": "docs/", "role_zh": "demo.mp4 演示视频 + share-poster.png 海报", "role_en": "demo.mp4 + share poster"}
+    ]
+  },
+  "reuse": [
+    {"item": "五套完整 token 色板（60+ token/套，含灰阶、边框四级、状态色、阴影）", "where": "skins/*/skin.css", "condition": "MIT"},
+    {"item": "「色卡即观感」的 theme-agnostic 皮肤写法", "where": "skins/*/skin.css 结构", "condition": "MIT，适用于任何 CSS 变量体系"},
+    {"item": "L1 纯 token 皮肤的安全分层思路", "where": "整体设计", "condition": "方法论可参考"}
+  ],
+  "evidence": {
+    "verified": [
+      "5 套皮肤目录结构一致（skin.css + skin.json + preview/light.jpg + dark.jpg，GitHub API 实查 2026-10-03）",
+      "每套 skin.css 只含 :root token 重映射，无 JS/补丁/媒体引用（逐文件实读）",
+      "LICENSE = MIT（仓库根目录实查）"
+    ],
+    "self_reported": [
+      "「皮肤中心可试穿/应用」的完整安装流程：需 DSH 环境实测"
+    ],
+    "unverified": []
+  },
+  "links": {
+    "showcase": "https://78tyih.github.io/dsh-deepseek-color/showcase.html",
+    "demo_video": "https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/docs/demo.mp4"
+  }
+}

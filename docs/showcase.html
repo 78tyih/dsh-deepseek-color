@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek Color · DSH 皮肤包 — 交互展示</title>
+<style>
+  :root{
+    --bg:#F7F8FA; --panel:#FFFFFF; --panel2:#F0F2F5; --ink:#1a1d21; --ink2:#5a6270; --ink3:#9aa2ae;
+    --line:#e2e5ea; --line2:#d4d8df;
+    --blue:#4D6BFE; --blue-soft:#E8EDFF; --up:#2F9E6E; --up-soft:#E2F2EB; --down:#D64545; --down-soft:#FBE9EA;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  html[data-theme="dark"]{
+    --bg:#121417; --panel:#1a1d22; --panel2:#22262c; --ink:#e8eaee; --ink2:#a8b0ba; --ink3:#6b7280;
+    --line:#2a2f36; --line2:#363c45;
+    --blue:#7b95ff; --blue-soft:#1e2540; --up:#4CC58F; --up-soft:#1b3328; --down:#F06666; --down-soft:#3a2224;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px 90px}
+  header{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+  .hbar{max-width:1080px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:12px}
+  .logo{font-weight:750;font-size:15px;display:flex;align-items:center;gap:9px}
+  .logo .sw{display:inline-flex;gap:3px}
+  .logo .sw i{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .hbar .spacer{flex:1}
+  .toggle{border:1px solid var(--line2);background:var(--panel);color:var(--ink2);border-radius:8px;padding:5px 12px;font-size:12.5px;cursor:pointer;font-family:inherit}
+  .toggle:hover{color:var(--ink);border-color:var(--blue)}
+  .repo-link{font-size:12.5px;color:var(--ink2);text-decoration:none;font-family:var(--mono)}
+  .repo-link:hover{color:var(--blue)}
+
+  .hero{padding:50px 0 28px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:11.5px;letter-spacing:.22em;color:var(--blue);font-weight:700;margin-bottom:13px;text-transform:uppercase;font-family:var(--mono)}
+  h1{font-size:34px;font-weight:780;letter-spacing:-.015em;line-height:1.24;margin-bottom:12px}
+  .sub{color:var(--ink2);font-size:15px;max-width:660px}
+  .metaline{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip{font-size:12px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-family:var(--mono)}
+  .chip b{color:var(--ink);font-weight:650}
+  .chip.hl{background:var(--blue-soft);border-color:transparent;color:var(--blue)}
+  .chip.hl b{color:var(--blue)}
+
+  section{padding:40px 0 6px}
+  .sec-head{display:flex;align-items:baseline;gap:13px;margin-bottom:18px}
+  .sec-no{font-family:var(--mono);font-size:11.5px;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:2px 8px}
+  h2{font-size:20px;font-weight:740;letter-spacing:-.01em}
+  .sec-q{font-size:12.5px;color:var(--ink3);margin-left:auto;text-align:right}
+  .note{font-size:13.5px;color:var(--ink2);max-width:700px;margin-bottom:18px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+
+  /* skin switcher */
+  .skin-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+  .stab{border:1px solid var(--line2);background:var(--panel);border-radius:10px;padding:9px 15px;cursor:pointer;display:flex;align-items:center;gap:9px;font-family:inherit;transition:all .15s}
+  .stab .dot{width:13px;height:13px;border-radius:4.5px;border:1px solid rgba(0,0,0,.14)}
+  .stab b{font-size:13.5px;font-weight:650;color:var(--ink)}
+  .stab span{font-size:11px;color:var(--ink3);font-family:var(--mono)}
+  .stab.on{border-color:var(--blue);background:var(--blue-soft)}
+  .stab:not(.on):hover{border-color:var(--blue)}
+
+  .live-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+  .mock-frame{border-radius:13px;overflow:hidden;border:1px solid var(--line)}
+  .mock-caption{padding:10px 16px;background:var(--panel);border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .mock-caption b{color:var(--ink);font-weight:650}
+  .mock-caption .motto{font-size:11.5px;color:var(--ink3);font-style:normal}
+
+  /* the live mockup — all colors driven by skin tokens */
+  .mock{
+    --sk-bg:#F5F7FB; --sk-l1:#fff; --sk-l2:#DCE5F5; --sk-l3:#A9BCE0; --sk-bd1:#0E1B3D14; --sk-bd2:#0E1B3D24;
+    --sk-ink:#0E1B3D; --sk-ink2:#5A6B8C; --sk-ink3:#909cb3; --sk-dim:#afb8c9;
+    --sk-brand:#4D6BFE; --sk-brandhov:#6983fe; --sk-fg:#fff; --sk-err:#D64545; --sk-warn:#C98A1B; --sk-ok:#2F9E6E;
+    --sk-side:#DCE5F5; --sk-tipbg:#0E1B3D; --sk-tipfg:#F5F7FB;
+    background:var(--sk-bg); display:grid; grid-template-columns:150px 1fr; min-height:330px; font-size:13px;
+  }
+  .m-side{background:var(--sk-side);border-right:1px solid var(--sk-bd2);padding:14px 10px;display:flex;flex-direction:column;gap:4px}
+  .m-brand{display:flex;align-items:center;gap:8px;padding:4px 8px 14px;color:var(--sk-ink);font-weight:700;font-size:13.5px}
+  .m-brand .bdot{width:16px;height:16px;border-radius:5px;background:var(--sk-brand)}
+  .m-nav{padding:8px 10px;border-radius:7px;color:var(--sk-ink2);font-size:12.5px;display:flex;gap:7px;align-items:center}
+  .m-nav i{width:6px;height:6px;border-radius:2px;background:var(--sk-dim);display:inline-block}
+  .m-nav.on{background:var(--sk-brand);color:var(--sk-fg)}
+  .m-nav.on i{background:var(--sk-fg)}
+  .m-nav:not(.on):hover{background:var(--sk-l1)}
+  .m-main{padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+  .m-card{background:var(--sk-l1);border:1px solid var(--sk-bd2);border-radius:11px;padding:15px 17px}
+  .m-h{font-size:14.5px;font-weight:700;color:var(--sk-ink)}
+  .m-p{font-size:12px;color:var(--sk-ink2);line-height:1.6}
+  .m-cap{font-size:10.5px;color:var(--sk-ink3)}
+  .m-lay{display:flex;gap:10px}
+  .m-lay .blk{height:38px;border-radius:8px;border:1px solid var(--sk-bd1)}
+  .m-lay .b1{flex:2;background:var(--sk-l2)}
+  .m-lay .b2{flex:1;background:var(--sk-l3)}
+  .m-btnrow{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+  .m-btn{border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit}
+  .m-btn.primary{background:var(--sk-brand);color:var(--sk-fg)}
+  .m-btn.primary:hover{background:var(--sk-brandhov)}
+  .m-btn.ghost{background:transparent;border:1px solid var(--sk-bd2);color:var(--sk-ink)}
+  .m-btn.ghost:hover{background:var(--sk-l1)}
+  .m-btn.contrast{background:var(--sk-ink);color:var(--sk-l1)}
+  .m-states{display:flex;gap:8px;flex-wrap:wrap}
+  .m-st{font-size:10.5px;font-weight:600;border-radius:999px;padding:3px 11px;color:#fff}
+  .m-st.e{background:var(--sk-err)} .m-st.w{background:var(--sk-warn)} .m-st.s{background:var(--sk-ok)} .m-st.b{background:var(--sk-brand)}
+  .m-tip{align-self:flex-start;background:var(--sk-tipbg);color:var(--sk-tipfg);font-size:11px;border-radius:7px;padding:5px 11px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .m-scroll{width:60%;align-self:flex-start;height:7px;border-radius:4px;background:transparent;position:relative}
+  .m-scroll i{position:absolute;right:0;top:1px;bottom:1px;width:34%;border-radius:4px;background:var(--sk-dim);opacity:.4}
+
+  /* token table */
+  .tok{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px 18px}
+  .tok h4{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.14em;text-transform:uppercase;margin:12px 0 6px}
+  .tok h4:first-child{margin-top:0}
+  .trow{display:flex;align-items:center;gap:9px;padding:4px 0;border-top:1px solid var(--line);font-size:11.5px}
+  .trow .swx{width:15px;height:15px;border-radius:4.5px;border:1px solid rgba(0,0,0,.15);flex:none}
+  .trow .tn{font-family:var(--mono);color:var(--ink2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .trow .tv{font-family:var(--mono);color:var(--ink);font-weight:600}
+
+  /* media */
+  .media-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;align-items:start}
+  .vidbox{border-radius:13px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+  .vidbox video{width:100%;display:block;background:#000}
+  .vidbox .vcap{padding:9px 14px;font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line)}
+  .prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .prev-grid img{width:100%;display:block;border-radius:10px;border:1px solid var(--line)}
+  .prev-lab{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:center;margin-top:4px}
+
+  /* Q sections */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .vs .side{border-radius:12px;padding:18px 20px;border:1px solid var(--line);background:var(--panel)}
+  .vs .side.good{background:var(--blue-soft);border-color:transparent}
+  .vs .side h3{font-size:14.5px;margin-bottom:9px}
+  .vs .side.bad h3{color:var(--down)} .vs .side.good h3{color:var(--blue)}
+  .vs li{list-style:none;font-size:13px;color:var(--ink2);padding:6px 0;border-top:1px solid var(--line);line-height:1.55}
+  .vs li b{color:var(--ink)}
+  table.mx{width:100%;border-collapse:collapse;font-size:13px}
+  table.mx th{text-align:left;font-size:11px;font-family:var(--mono);color:var(--ink3);letter-spacing:.08em;padding:7px 9px;border-bottom:1px solid var(--line2);font-weight:600;text-transform:uppercase}
+  table.mx td{padding:10px 9px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+  table.mx tr:last-child td{border-bottom:none}
+  .ok-pill{font-family:var(--mono);font-size:11px;background:var(--up-soft);color:var(--up);border-radius:5px;padding:2px 8px;white-space:nowrap;display:inline-block}
+  .reuse-note{display:flex;gap:11px;align-items:flex-start;background:var(--up-soft);border-radius:10px;padding:13px 16px;font-size:13px;margin-top:14px;line-height:1.6}
+  .reuse-note b{color:var(--up)}
+
+  footer{margin-top:54px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3);display:flex;gap:16px;flex-wrap:wrap}
+  footer a{color:var(--ink2);text-decoration:none} footer a:hover{color:var(--blue)}
+  .en{display:none}
+  html[data-lang="en"] .zh{display:none}
+  html[data-lang="en"] .en{display:inline}
+  @media (max-width:900px){ .live-grid,.media-grid,.vs{grid-template-columns:1fr} h1{font-size:28px} }
+</style>
+</head>
+<body>
+<header>
+  <div class="hbar">
+    <div class="logo"><span class="sw"><i style="background:#4D6BFE"></i><i style="background:#00B3F4"></i><i style="background:#5B8CFF"></i></span>DeepSeek Color<span style="color:var(--ink3);font-weight:400">· DSH skins</span></div>
+    <div class="spacer"></div>
+    <a class="repo-link" href="https://github.com/78tyih/dsh-deepseek-color" target="_blank">78tyih/dsh-deepseek-color ↗</a>
+    <button class="toggle" id="langBtn" onclick="toggleLang()">EN</button>
+    <button class="toggle" id="themeBtn" onclick="toggleTheme()">☀︎ Dark</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">token pack · L1 pure-token skins · schema v2</div>
+  <h1><span class="zh">五套色卡，换掉整个 Harness 的观感<br>零补丁 · 零脚本 · 零背景媒体</span><span class="en">Five palettes, one whole new Harness look<br>No patches · no scripts · no media</span></h1>
+  <p class="sub zh">每个皮肤只是一份 CSS 变量重映射（官方 <code style="font-family:var(--mono);font-size:.85em">--dsw-alias-*</code> 语义 token），是皮肤体系里最安全的 L1 层。下面这个界面是活的——用的就是仓库里的真实 token 值，点上面切换。</p>
+  <p class="sub en">Each skin is a single CSS-variable remap of the official <code style="font-family:var(--mono);font-size:.85em">--dsw-alias-*</code> semantic tokens — the safest L1 layer of the skin system. The mockup below is live, driven by the actual token values from the repo. Switch skins above.</p>
+  <div class="metaline">
+    <span class="chip hl"><b>5</b> skins</span>
+    <span class="chip"><b>60+</b> tokens / skin</span>
+    <span class="chip">L1 · pure remap</span>
+    <span class="chip">theme-agnostic</span>
+    <span class="chip">license <b>MIT</b></span>
+  </div>
+</div>
+
+<!-- live skins -->
+<section id="skins">
+  <div class="sec-head"><span class="sec-no">◆</span><h2><span class="zh">五套皮肤 · 实时试穿</span><span class="en">Five skins · try them on live</span></h2><span class="sec-q"><span class="zh">mockup = 仓库真实 token 渲染</span><span class="en">mockup rendered with real repo tokens</span></span></div>
+  <div class="skin-tabs" id="tabs"></div>
+  <div class="live-grid">
+    <div>
+      <div class="mock-frame">
+        <div class="mock" id="mock">
+          <div class="m-side">
+            <div class="m-brand"><span class="bdot"></span>DeepSeek</div>
+            <div class="m-nav on"><i></i><span class="zh">对话</span><span class="en">Chat</span></div>
+            <div class="m-nav"><i></i><span class="zh">搜索</span><span class="en">Search</span></div>
+            <div class="m-nav"><i></i><span class="zh">知识库</span><span class="en">Library</span></div>
+            <div class="m-nav"><i></i><span class="zh">设置</span><span class="en">Settings</span></div>
+          </div>
+          <div class="m-main">
+            <div class="m-card">
+              <div class="m-h"><span class="zh">模型回应</span><span class="en">Response</span></div>
+              <p class="m-p"><span class="zh">token 重映射不触碰 DOM。色卡本身就是完整观感——值写在 :root，明暗模式一致呈现。</span><span class="en">Token remapping never touches the DOM. The palette is the whole look — values live on :root, same in both modes.</span></p>
+              <div class="m-lay"><div class="blk b1"></div><div class="blk b2"></div></div>
+              <div class="m-cap">skeleton · layer-2 · layer-3</div>
+            </div>
+            <div class="m-btnrow">
+              <button class="m-btn primary"><span class="zh">主要操作</span><span class="en">Primary</span></button>
+              <button class="m-btn ghost">Hover / <span class="zh">次要</span><span class="en">ghost</span></button>
+              <button class="m-btn contrast"><span class="zh">对比钮</span><span class="en">Contrast</span></button>
+            </div>
+            <div class="m-states">
+              <span class="m-st e">error</span><span class="m-st w">warning</span><span class="m-st s">success</span><span class="m-st b">business</span>
+            </div>
+            <div class="m-tip">tooltip · <span class="zh">提示气泡</span><span class="en">bubble</span></div>
+            <div class="m-scroll"><i></i></div>
+          </div>
+        </div>
+        <div class="mock-caption"><b id="skinName">Deep Dive Blue</b><span class="motto" id="skinMotto"></span></div>
+      </div>
+    </div>
+    <div class="tok" id="tokTable"></div>
+  </div>
+</section>
+
+<!-- media -->
+<section id="media">
+  <div class="sec-head"><span class="sec-no">▶</span><h2><span class="zh">演示与预览</span><span class="en">Demo &amp; Previews</span></h2><span class="sec-q">jsDelivr CDN</span></div>
+  <div class="media-grid">
+    <div class="vidbox">
+      <video src="https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/docs/demo.mp4" controls muted playsinline preload="metadata"></video>
+      <div class="vcap"><span class="zh">20 秒演示：五套皮肤切换效果一览（仓库 <code>docs/demo.mp4</code>）</span><span class="en">20s demo: all five skins switching (repo docs/demo.mp4)</span></div>
+    </div>
+    <div>
+      <div class="prev-grid">
+        <div><img src="https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/skins/deep-dive-blue/preview/light.jpg" alt="Deep Dive Blue light preview"><div class="prev-lab">deep-dive-blue · light</div></div>
+        <div><img src="https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/skins/deep-dive-blue/preview/dark.jpg" alt="Deep Dive Blue dark preview"><div class="prev-lab">deep-dive-blue · dark</div></div>
+      </div>
+      <div class="prev-grid" style="margin-top:10px">
+        <div><img src="https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/skins/midnight-cluster/preview/dark.jpg" alt="Midnight Cluster dark preview"><div class="prev-lab">midnight-cluster · dark</div></div>
+        <div><img src="https://cdn.jsdelivr.net/gh/78tyih/dsh-deepseek-color@main/docs/share-poster.png" alt="五大色卡海报"><div class="prev-lab">share-poster.png</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Q1 -->
+<section id="q1">
+  <div class="sec-head"><span class="sec-no">Q1</span><h2><span class="zh">解决什么问题</span><span class="en">Problem</span></h2></div>
+  <div class="vs">
+    <div class="side bad">
+      <h3>✕ <span class="zh">常见换肤方式</span><span class="en">Typical reskinning</span></h3>
+      <ul>
+        <li><span class="zh"><b>补丁 DOM / 注入 JS</b> — 官方一更新就失效，且有安全面</span><span class="en"><b>DOM patches / injected JS</b> — breaks on updates, adds attack surface</span></li>
+        <li><span class="zh"><b>替换背景媒体</b> — 包体大、加载慢、观感不可控</span><span class="en"><b>Background media swaps</b> — heavy and unpredictable</span></li>
+        <li><span class="zh"><b>随手配色</b> — 灰阶、边框、状态色各写各的，没有体系</span><span class="en"><b>Ad-hoc colors</b> — grays, borders and states with no system</span></li>
+      </ul>
+    </div>
+    <div class="side good">
+      <h3>✓ <span class="zh">本皮肤包</span><span class="en">This pack</span></h3>
+      <ul>
+        <li><span class="zh"><b>L1 纯 token</b> — 只重映射官方语义变量，官方更新自动兼容</span><span class="en"><b>L1 pure-token</b> — remaps official semantic vars; survives updates</span></li>
+        <li><span class="zh"><b>每套 60+ token</b> — surfaces / 四级边框 / 四级文字灰阶 / 状态色 / 阴影全覆盖</span><span class="en"><b>60+ tokens per skin</b> — surfaces, 4-level borders &amp; grays, states, shadows</span></li>
+        <li><span class="zh"><b>theme-agnostic</b> — 色卡即完整观感，明暗模式一致</span><span class="en"><b>theme-agnostic</b> — the palette is the look, in both modes</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Q2 -->
+<section id="q2">
+  <div class="sec-head"><span class="sec-no">Q2</span><h2><span class="zh">什么场景，得到什么结果</span><span class="en">Scenario → Outcome</span></h2></div>
+  <div class="panel" style="padding:6px 20px">
+    <table class="mx">
+      <thead><tr><th><span class="zh">皮肤</span><span class="en">Skin</span></th><th><span class="zh">基调</span><span class="en">Mood</span></th><th><span class="zh">适用场景</span><span class="en">Best for</span></th><th><span class="zh">入口</span><span class="en">Dir</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>Deep Dive Blue</b></td><td><span class="zh">冷白纸底 × 深潜蓝 <code>#4D6BFE</code></span><span class="en">cool paper × deep blue</span></td><td><span class="zh">AI 产品与官网（DeepSeek 主色系）</span><span class="en">AI products &amp; sites</span></td><td><code>skins/deep-dive-blue</code></td></tr>
+        <tr><td><b>Whale Cyan</b></td><td><span class="zh">海盐底 × 鲸青 <code>#00B3F4</code></span><span class="en">sea-salt × whale cyan</span></td><td><span class="zh">数据产品与开发者工具</span><span class="en">data products &amp; dev tools</span></td><td><code>skins/whale-cyan</code></td></tr>
+        <tr><td><b>Midnight Cluster</b></td><td><span class="zh">深海军蓝夜底 × 信号蓝 <code>#5B8CFF</code></span><span class="en">midnight navy × signal blue</span></td><td><span class="zh">暗色大屏与硬件发布</span><span class="en">dark dashboards &amp; launches</span></td><td><code>skins/midnight-cluster</code></td></tr>
+        <tr><td><b>Silver Mist</b></td><td><span class="zh">中性灰银 × 深潜蓝</span><span class="en">neutral silver × deep blue</span></td><td><span class="zh">金融与企业官网（最克制）</span><span class="en">finance &amp; enterprise (most restrained)</span></td><td><code>skins/silver-mist</code></td></tr>
+        <tr><td><b>Coral Signal</b></td><td><span class="zh">暖沙底 × 珊瑚橙 <code>#FF5A3C</code></span><span class="en">warm sand × coral</span></td><td><span class="zh">消费级 AI 与内容产品</span><span class="en">consumer AI &amp; content</span></td><td><code>skins/coral-signal</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <div class="zh" style="font-size:13.5px;color:var(--ink2)"><b style="color:var(--ink)">最小使用路径：</b>前置——先装皮肤中心 <code>dsh plugin --profile web add @linxin666/dsh-client-ui-skin-center@latest</code>；然后把想要的皮肤目录拷进 <code>~/.dsh/skins/</code>；重启 <code>dsh web</code> → 设置 → 插件 → 皮肤中心 → 刷新 → 试穿 / 应用。</div>
+    <div class="en" style="font-size:13.5px;color:var(--ink2)"><b style="color:var(--ink)">Minimal path:</b> prerequisite — install the skin center plugin; copy your chosen skin directory into <code>~/.dsh/skins/</code>; restart <code>dsh web</code> → Settings → Plugins → Skin Center → refresh → try on / apply.</div>
+  </div>
+</section>
+
+<!-- Q3 -->
+<section id="q3">
+  <div class="sec-head"><span class="sec-no">Q3</span><h2><span class="zh">什么结构</span><span class="en">Structure</span></h2></div>
+  <div class="panel">
+    <svg viewBox="0 0 960 150" style="width:100%;height:auto" role="img" aria-label="skin structure">
+      <defs><marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>
+      <rect x="20" y="34" width="180" height="66" rx="10" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.4"/>
+      <text x="110" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">skins/&lt;name&gt;/</text>
+      <text x="110" y="80" text-anchor="middle" font-size="10.5" fill="var(--ink2)">skin.json · skin.css · preview/</text>
+      <rect x="260" y="34" width="230" height="66" rx="10" fill="var(--panel2)" stroke="var(--line2)"/>
+      <text x="375" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">skin.css · :root</text>
+      <text x="375" y="76" text-anchor="middle" font-size="10.5" fill="var(--ink2)">--dsw-alias-* (L1 语义 token)</text>
+      <text x="375" y="92" text-anchor="middle" font-size="10.5" fill="var(--ink2)">--dsw-specific-* · --dsw-shadow-*</text>
+      <rect x="550" y="34" width="180" height="66" rx="10" fill="var(--panel2)" stroke="var(--line2)"/>
+      <text x="640" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">DSH Harness</text>
+      <text x="640" y="80" text-anchor="middle" font-size="10.5" fill="var(--ink2)">官方 UI 消费语义 token</text>
+      <rect x="790" y="34" width="150" height="66" rx="10" fill="var(--up-soft)" stroke="var(--up)" stroke-width="1.2"/>
+      <text x="865" y="60" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">皮肤中心</text>
+      <text x="865" y="80" text-anchor="middle" font-size="10.5" fill="var(--ink2)">试穿 · 应用</text>
+      <line x1="200" y1="67" x2="255" y2="67" stroke="var(--ink3)" stroke-width="1.3" marker-end="url(#aa)"/>
+      <line x1="490" y1="67" x2="545" y2="67" stroke="var(--ink3)" stroke-width="1.3" marker-end="url(#aa)"/>
+      <line x1="730" y1="55" x2="785" y2="55" stroke="var(--ink3)" stroke-width="1.3" marker-end="url(#aa)"/>
+      <text x="225" y="58" text-anchor="middle" font-size="9.5" fill="var(--ink3)">加载</text>
+      <text x="517" y="58" text-anchor="middle" font-size="9.5" fill="var(--ink3)">重映射</text>
+    </svg>
+  </div>
+  <p class="note zh" style="margin-top:12px">零补丁（无 patches.css）、零脚本（无 hooks.mjs）、零背景媒体——皮肤体系里的 L1 安全层。设计系统完整文档（10 个网页骨架、token 表、换肤工作流）见主仓库 <a href="https://github.com/78tyih/deepseek-color" style="color:var(--blue)">78tyih/deepseek-color</a>。</p>
+  <p class="note en" style="margin-top:12px">No patches.css, no hooks.mjs, no background media — the L1 safety layer of the skin system. Full design-system docs (10 page skeletons, token tables, reskin workflow) live in the main repo <a href="https://github.com/78tyih/deepseek-color" style="color:var(--blue)">78tyih/deepseek-color</a>.</p>
+</section>
+
+<!-- Q4 -->
+<section id="q4">
+  <div class="sec-head"><span class="sec-no">Q4</span><h2><span class="zh">能复用什么</span><span class="en">Reuse</span></h2></div>
+  <div class="panel" style="padding:6px 20px">
+    <table class="mx">
+      <thead><tr><th><span class="zh">可复用部分</span><span class="en">Part</span></th><th><span class="zh">在哪</span><span class="en">Where</span></th><th><span class="zh">怎么接</span><span class="en">How</span></th></tr></thead>
+      <tbody>
+        <tr><td><b><span class="zh">五套完整 token 色板</span><span class="en">Five full palettes</span></b></td><td><code>skins/*/skin.css</code></td><td><span class="zh">直接拷值到任何 CSS 变量体系</span><span class="en">copy values into any CSS-variable system</span></td></tr>
+        <tr><td><b><span class="zh">theme-agnostic 皮肤写法</span><span class="en">theme-agnostic pattern</span></b></td><td><span class="zh">skin.css 结构</span><span class="en">skin.css structure</span></td><td><span class="zh">「色卡即观感」：值写 :root，明暗一致</span><span class="en">palette-as-look on :root</span></td></tr>
+        <tr><td><b><span class="zh">L1 分层思路</span><span class="en">L1 layering idea</span></b></td><td><span class="zh">整体设计</span><span class="en">overall design</span></td><td><span class="zh">做任何产品皮肤/主题包时照抄这个安全分层</span><span class="en">adopt this safety layering for any theme pack</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="reuse-note"><b>✓</b><span><span class="zh"><b>MIT 授权</b>——token 与代码可自由复制、修改、再分发（保留版权声明即可）。</span><span class="en"><b>MIT licensed</b> — copy, modify and redistribute freely (keep the notice).</span></span></div>
+</section>
+
+<footer>
+  <span style="font-family:var(--mono)">DeepSeek Color · showcase v0.1 · 2026-10-03</span>
+  <a href="https://github.com/78tyih/dsh-deepseek-color" target="_blank">GitHub ↗</a>
+  <a href="https://github.com/78tyih/deepseek-color" target="_blank"><span class="zh">设计系统主仓库</span><span class="en">Design system repo</span></a>
+  <span><span class="zh">mockup 由仓库真实 token 渲染；视频/预览图经 jsDelivr</span><span class="en">mockup uses real repo tokens; media via jsDelivr</span></span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+var SKINS=[
+ {id:'deep-dive-blue',en:'Deep Dive Blue',zh:'深潜蓝',accent:'#4D6BFE',
+  mood:{zh:'AI 产品与官网 · DeepSeek 主色系',en:'AI products & sites · DeepSeek primary'},
+  motto:'「向下潜，直到光变成蓝色——思想的深度，决定了蓝的纯度。」',
+  t:{bg:'#F5F7FB',l1:'#FFFFFF',l2:'#DCE5F5',l3:'#A9BCE0',bd1:'#0E1B3D14',bd2:'#0E1B3D24',bd4:'#0E1B3D48',ink:'#0E1B3D',ink2:'#5A6B8C',ink3:'#909cb3',dim:'#afb8c9',brand:'#4D6BFE',brandhov:'#6983fe',fg:'#FFFFFF',err:'#D64545',warn:'#C98A1B',ok:'#2F9E6E',side:'#DCE5F5',tipbg:'#0E1B3D',tipfg:'#F5F7FB'}},
+ {id:'whale-cyan',en:'Whale Cyan',zh:'鲸鱼浅青',accent:'#00B3F4',
+  mood:{zh:'数据产品与开发者工具',en:'Data products & dev tools'},
+  motto:'「鲸鱼跃出海面的那一秒，整个世界都是浅青色的。」',
+  t:{bg:'#F2F8F9',l1:'#FFFFFF',l2:'#DDEEF0',l3:'#A8CFD6',bd1:'#12333B14',bd2:'#12333B24',bd4:'#12333B48',ink:'#12333B',ink2:'#4A6A72',ink3:'#859ca1',dim:'#a6b8bc',brand:'#00B3F4',brandhov:'#29bff6',fg:'#FFFFFF',err:'#D64545',warn:'#C98A1B',ok:'#2F9E6E',side:'#DDEEF0',tipbg:'#12333B',tipfg:'#F2F8F9'}},
+ {id:'midnight-cluster',en:'Midnight Cluster',zh:'深夜机房',accent:'#5B8CFF',
+  mood:{zh:'暗色大屏与硬件发布',en:'Dark dashboards & hardware launches'},
+  motto:'「深夜的机房没有声音，只有信号灯替星辰值班。」',
+  t:{bg:'#0D1420',l1:'#1c222d',l2:'#16202F',l3:'#2A3A52',bd1:'#E8EDF514',bd2:'#E8EDF524',bd4:'#E8EDF548',ink:'#E8EDF5',ink2:'#8B99AF',ink3:'#5f6a7d',dim:'#78859a',brand:'#5B8CFF',brandhov:'#79a1ff',fg:'#0D1420',err:'#F06666',warn:'#E0A63F',ok:'#4CC58F',side:'#16202F',tipbg:'#0D1420',tipfg:'#0D1420'}},
+ {id:'silver-mist',en:'Silver Mist',zh:'雾灰银',accent:'#4D6BFE',
+  mood:{zh:'金融与企业官网 · 最克制',en:'Finance & enterprise · most restrained'},
+  motto:'「清晨的雾最克制，它什么都不说，却让一切显得更贵。」',
+  t:{bg:'#F4F4F2',l1:'#FFFFFF',l2:'#E4E5E1',l3:'#C6CBC9',bd1:'#1A1D2114',bd2:'#1A1D2124',bd4:'#1A1D2148',ink:'#1A1D21',ink2:'#5C615E',ink3:'#919492',dim:'#b0b2af',brand:'#4D6BFE',brandhov:'#6983fe',fg:'#FFFFFF',err:'#D64545',warn:'#C98A1B',ok:'#2F9E6E',side:'#E4E5E1',tipbg:'#1A1D21',tipfg:'#F4F4F2'}},
+ {id:'coral-signal',en:'Coral Signal',zh:'珊瑚信号',accent:'#FF5A3C',
+  mood:{zh:'消费级 AI 与内容产品',en:'Consumer AI & content'},
+  motto:'「深海里最暖的一束光，是珊瑚在说：我在这里。」',
+  t:{bg:'#FBF6F1',l1:'#FFFFFF',l2:'#F0E4DA',l3:'#E3C4B5',bd1:'#2B1D1814',bd2:'#2B1D1824',bd4:'#2B1D1848',ink:'#2B1D18',ink2:'#7A6157',ink3:'#a7958d',dim:'#c1b3ac',brand:'#FF5A3C',brandhov:'#ff745b',fg:'#FFFFFF',err:'#D64545',warn:'#C98A1B',ok:'#2F9E6E',side:'#F0E4DA',tipbg:'#2B1D18',tipfg:'#FBF6F1'}}
+];
+var TOKEN_GROUPS=[
+ ['surfaces',[['bg-base','bg'],['bg-layer-1','l1'],['bg-layer-2','l2'],['bg-layer-3','l3']]],
+ ['borders',[['border-l1','bd1'],['border-l2','bd2'],['border-l4','bd4']]],
+ ['labels',[['label-primary','ink'],['label-secondary','ink2'],['label-tertiary','ink3'],['label-dimmed','dim']]],
+ ['brand / buttons',[['brand-primary','brand'],['button-primary-hover','brandhov'],['primary-foreground','fg']]],
+ ['states',[['state-error','err'],['state-warn','warn'],['state-success','ok']]],
+ ['shell / overlay',[['sidebar-fill','side'],['tooltip-bg','tipbg'],['tooltip-fg','tipfg']]]
+];
+var tabs=document.getElementById('tabs'),mock=document.getElementById('mock'),
+    tokT=document.getElementById('tokTable'),nameEl=document.getElementById('skinName'),mottoEl=document.getElementById('skinMotto');
+SKINS.forEach(function(s,i){
+  var b=document.createElement('button');b.className='stab';b.id='tab-'+s.id;
+  b.innerHTML='<span class="dot" style="background:'+s.accent+'"></span><b>'+s.en+'</b><span>'+s.zh+'</span>';
+  b.addEventListener('click',function(){apply(s);});
+  tabs.appendChild(b);
+});
+function apply(s){
+  tabs.querySelectorAll('.stab').forEach(function(b){b.classList.toggle('on',b.id==='tab-'+s.id);});
+  var m=s.t;
+  mock.style.setProperty('--sk-bg',m.bg);mock.style.setProperty('--sk-l1',m.l1);mock.style.setProperty('--sk-l2',m.l2);mock.style.setProperty('--sk-l3',m.l3);
+  mock.style.setProperty('--sk-bd1',m.bd1);mock.style.setProperty('--sk-bd2',m.bd2);mock.style.setProperty('--sk-bd4',m.bd4);
+  mock.style.setProperty('--sk-ink',m.ink);mock.style.setProperty('--sk-ink2',m.ink2);mock.style.setProperty('--sk-ink3',m.ink3);mock.style.setProperty('--sk-dim',m.dim);
+  mock.style.setProperty('--sk-brand',m.brand);mock.style.setProperty('--sk-brandhov',m.brandhov);mock.style.setProperty('--sk-fg',m.fg);
+  mock.style.setProperty('--sk-err',m.err);mock.style.setProperty('--sk-warn',m.warn);mock.style.setProperty('--sk-ok',m.ok);
+  mock.style.setProperty('--sk-side',m.side);mock.style.setProperty('--sk-tipbg',m.tipbg);mock.style.setProperty('--sk-tipfg',m.tipfg);
+  nameEl.textContent=s.en+' · '+s.zh;
+  mottoEl.textContent=s.motto+'　'+s.mood.zh;
+  var html='';
+  TOKEN_GROUPS.forEach(function(g){
+    html+='<h4>'+g[0]+'</h4>';
+    g[1].forEach(function(t){
+      var v=m[t[1]];
+      html+='<div class="trow"><span class="swx" style="background:'+v+'"></span><span class="tn">--dsw-'+(t[0].indexOf('sidebar')===0?'specific-':'alias-')+t[0]+'</span><span class="tv">'+v+'</span></div>';
+    });
+  });
+  tokT.innerHTML=html;
+}
+apply(SKINS[0]);
+
+/* theme/lang */
+function applyTL(t,l){
+  document.documentElement.setAttribute('data-theme',t);
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.setAttribute('lang',l==='zh'?'zh-CN':'en');
+  localStorage.setItem('dsc-theme',t);localStorage.setItem('dsc-lang',l);
+  document.getElementById('themeBtn').textContent=t==='light'?'☀︎ Dark':'☀︎ Light';
+  document.getElementById('langBtn').textContent=l==='zh'?'EN':'中';
+}
+var p=new URLSearchParams(location.search);
+var th=p.get('theme')||localStorage.getItem('dsc-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+var lg=p.get('lang')||localStorage.getItem('dsc-lang')||'zh';
+applyTL(th,lg);
+window.toggleTheme=function(){applyTL(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark',document.documentElement.getAttribute('data-lang'));};
+window.toggleLang=function(){applyTL(document.documentElement.getAttribute('data-theme'),document.documentElement.getAttribute('data-lang')==='zh'?'en':'zh');};
+})();
+</script>
+</body>
+</html>
