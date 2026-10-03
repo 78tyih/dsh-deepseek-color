@@ -10,6 +10,10 @@
 
 ![DeepSeek Color 五大色卡](docs/share-poster.png)
 
+**换肤动起来长这样**（GIF 速览；完整 20 秒演示见下方视频链接）：
+
+![五套皮肤切换](docs/assets/skin-switch.gif)
+
 ▶️ [观看 20 秒演示视频](docs/demo.mp4)——五套皮肤切换效果一览（GitHub 文件页内可直接播放）。
 
 ---
